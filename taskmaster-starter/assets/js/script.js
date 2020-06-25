@@ -35,9 +35,11 @@ var loadTasks = function() {
     });
     });
 };
+
 var saveTasks = function() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 };
+
 $(".list-group").on("click", "p", function() {
   var text = $(this)
     .text()
@@ -49,6 +51,7 @@ $(".list-group").on("click", "p", function() {
     $(this).replaceWith(textInput);
     textInput.trigger("focus");
 });
+
 $(".list-group").on("blur", "textarea", function() {
   // get the textarea's current value
   var text = $(this)
@@ -72,6 +75,7 @@ $(".list-group").on("blur", "textarea", function() {
     $(this).replaceWith(taskP);
     saveTasks();
 });
+
 // due date was clicked
 $(".list-group").on("click", "span", function() {
   // get current text
@@ -88,6 +92,7 @@ $(".list-group").on("click", "span", function() {
     // automatically focus on new element
     dateInput.trigger("focus");
 });
+
 // value of due date was changed
 $(".list-group").on("blur", "input[type='text']", function() {
   // get current text
@@ -113,16 +118,19 @@ $(".list-group").on("blur", "input[type='text']", function() {
     // replace input with span element
     $(this).replaceWith(taskSpan);
 });
+
 // modal was triggered
 $("#task-form-modal").on("show.bs.modal", function() {
     // clear values
     $("#modalTaskDescription, #modalDueDate").val("");
 });
+
 // modal is fully visible
 $("#task-form-modal").on("shown.bs.modal", function() {
     // highlight textarea
     $("#modalTaskDescription").trigger("focus");
 });
+
 // save button in modal was clicked
 $("#task-form-modal .btn-primary").click(function() {
   // get form values
@@ -140,6 +148,7 @@ $("#task-form-modal .btn-primary").click(function() {
     saveTasks();
     }
 });
+
 // remove all tasks
 $("#remove-tasks").on("click", function() {
     for (var key in tasks) {
@@ -148,6 +157,7 @@ $("#remove-tasks").on("click", function() {
     }
     saveTasks();
 });
+
 // load tasks for the first time
 loadTasks();
 
