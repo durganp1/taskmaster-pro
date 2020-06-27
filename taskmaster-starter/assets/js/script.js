@@ -28,8 +28,8 @@ var loadTasks = function() {
         inProgress: [],
         inReview: [],
         done: []
-    };
-  }
+      };
+    }
     // loop over object properties
     $.each(tasks, function(list, arr) {
     // then loop over sub-array
@@ -199,8 +199,7 @@ var auditTask = function(taskEl) {
     .text()
     .trim();
   // convert to moment object at 5:00pm
-  var time = moment(date, "L")
-    .set("hour", 17);
+  var time = moment(date, "L").set("hour", 17);
   // remove any old classes from element
   $(taskEl).removeClass("list-group-item-warning list-group-item-danger");
   // apply new class if task is near/over due date
@@ -209,7 +208,7 @@ var auditTask = function(taskEl) {
   }
   else if (Math.abs(moment().diff(time, "days")) <=2) {
     $(taskEl).addClass("list-group-item-warning");
-  }
+  } 
 };
 
 // modal was triggered
@@ -262,4 +261,9 @@ $("#remove-tasks").on("click", function() {
 // load tasks for the first time
 loadTasks();
 
+setInterval(function() {
+  $(".card .list-group-item").each(function (el) {
+    auditTask(el);
+  });
+}, (1000 * 60) * 30);
 
